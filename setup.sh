@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ $(id -u) != 0 ]]; then
+  # 
+  exec sudo /usr/bin/env "SSH_AUTH_SOCK=${SSH_AUTH_SOCK:-/dev/null}" "$0" "$@"
+fi
+
 sudo yum install -y -q pssh
 
 # usage: echo_time_diff name start_time end_time
